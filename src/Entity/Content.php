@@ -29,17 +29,17 @@ class Content
 
     #[ORM\ManyToOne(targetEntity: Content::class)]
     #[ORM\JoinColumn(name: "parent_content_id", referencedColumnName: "id", nullable: true)]
-    private ?Content $parentContent;
+    private ?Content $parentContent = null;
 
     #[ORM\ManyToOne(targetEntity: Content::class)]
     #[ORM\JoinColumn(name: "previous_content_id", referencedColumnName: "id", nullable: true)]
-    private ?Content $previousContent;
+    private ?Content $previousContent = null;
 
     #[ORM\ManyToOne(targetEntity: Content::class)]
     #[ORM\JoinColumn(name: "next_content_id", referencedColumnName: "id", nullable: true)]
-    private ?Content $nextContent;
+    private ?Content $nextContent = null;
 
-    #[ORM\ManyToOne(targetEntity: Translation::class)]
+    #[ORM\ManyToOne(targetEntity: Translation::class, cascade: ['persist'])]
     #[ORM\JoinColumn(name: "translation_id", referencedColumnName: "id")]
     private Translation $translation;
 
