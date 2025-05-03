@@ -25,17 +25,17 @@ class Chapter
     #[ORM\JoinColumn(name: 'course_id', referencedColumnName: 'id')]
     private Course $course;
 
-    #[ORM\ManyToOne(targetEntity: Translation::class)]
+    #[ORM\ManyToOne(targetEntity: Translation::class, cascade: ['persist'])]
     #[ORM\JoinColumn(name: "translation_id", referencedColumnName: "id")]
     private Translation $translation;
 
-    #[ORM\ManyToOne(targetEntity: self::class)]
+    #[ORM\ManyToOne(targetEntity: self::class, cascade: ['persist'])]
     #[ORM\JoinColumn(name: 'previous_chapter_id', referencedColumnName: 'id', nullable: true)]
-    private ?Chapter $previousChapter;
+    private ?Chapter $previousChapter = null;
 
-    #[ORM\ManyToOne(targetEntity: self::class)]
+    #[ORM\ManyToOne(targetEntity: self::class, cascade: ['persist'])]
     #[ORM\JoinColumn(name: 'next_chapter_id', referencedColumnName: 'id', nullable: true)]
-    private ?Chapter $nextChapter;
+    private ?Chapter $nextChapter = null;
 
     #[ORM\Column(type: 'datetime')]
     private DateTime $createdAt;
