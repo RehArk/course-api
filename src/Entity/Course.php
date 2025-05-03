@@ -18,7 +18,7 @@ class Course
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private string $id;
 
-    #[ORM\ManyToOne(targetEntity: Translation::class)]
+    #[ORM\ManyToOne(targetEntity: Translation::class, cascade: ['persist'])]
     #[ORM\JoinColumn(name: "translation_id", referencedColumnName: "id")]
     private Translation $translation;
 
