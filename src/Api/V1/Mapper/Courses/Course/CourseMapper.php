@@ -11,6 +11,7 @@ class CourseMapper
     {
         return new CourseOutput(
             $course->getId(),
+            $course->getTranslation()->getText(),
             $course->getCreatedAt(),
             $course->getUpdatedAt()
         );

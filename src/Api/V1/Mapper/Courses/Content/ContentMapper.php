@@ -17,9 +17,9 @@ class ContentMapper {
             $content->getPreviousContent()?->getId(),
             $content->getNextContent()?->getId(),
             $content->getType()->getId(),
+            $content->getTranslation()->getText(),
             $content->getCreatedAt(),
             $content->getUpdatedAt()
         );
     }
-    
 }

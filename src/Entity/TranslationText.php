@@ -40,7 +40,7 @@ class TranslationText
         return $this->translation;
     }
 
-    public function setTranslation(Translation $translation): self
+    public function setTranslation(?Translation $translation): self
     {
         $this->translation = $translation;
         return $this;

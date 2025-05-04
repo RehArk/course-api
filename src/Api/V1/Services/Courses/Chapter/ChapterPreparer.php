@@ -38,7 +38,8 @@ class ChapterPreparer implements PreparerInterface {
 
         return new PreparedChapterInput(
             $course,
-            $previousChapter
+            $previousChapter,
+            $input->default_title
         );
     }
 }

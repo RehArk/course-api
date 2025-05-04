@@ -20,4 +20,8 @@ class ContentInput
     #[Assert\Type(type: 'integer')]
     #[Assert\Positive]
     public int $content_type_id;
+
+    #[NotNull()]
+    #[NotBlank()]
+    public string $default_content;
 }

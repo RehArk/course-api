@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TranslationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 
@@ -16,14 +18,55 @@ class Translation
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private string $id;
 
+    #[ORM\OneToMany(mappedBy: "translation", targetEntity: TranslationText::class, cascade: ['persist'], orphanRemoval: true)]
+    private Collection $translationTexts;
+
+    public function __construct()
+    {
+        $this->translationTexts = new ArrayCollection();
+    }
+
     public function getId(): string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function getText(
+        ?string $locale = null
+    ): ?string {
+
+        $locale = $locale ?? \Locale::getDefault();
+
+        $text = $this->getTranslationTexts()->filter(
+            fn($text) => $text->getLanguage()->getCode() === $locale
+        )->first() ?: null;
+        
+        return $text?->getText();
+    }
+
+    public function getTranslationTexts(): Collection
     {
-        $this->id = $id;
+        return $this->translationTexts;
+    }
+
+    public function addTranslationText(TranslationText $translationText): self
+    {       
+        if (!$this->translationTexts->contains($translationText)) {
+            $this->translationTexts->add($translationText);
+            $translationText->setTranslation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTranslationText(TranslationText $translationText): self
+    {
+        if ($this->translationTexts->removeElement($translationText)) {
+            if ($translationText->getTranslation() === $this) {
+                $translationText->setTranslation(null);
+            }
+        }
+
         return $this;
     }
 }

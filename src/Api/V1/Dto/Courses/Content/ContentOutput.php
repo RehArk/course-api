@@ -9,13 +9,13 @@ use DateTime;
 
 class ContentOutput
 {
-
     public string $id;
     public string $chapter;
     public ?string $parentContent;
     public ?string $previousContent;
     public ?string $nextContent;
-    public string $type;
+    public int $type;
+    public ?string $content;
     public DateTime $createdAt;
     public DateTime $updatedAt;
 
@@ -26,6 +26,7 @@ class ContentOutput
         ?string $previousContent,
         ?string $nextContent,
         int $type,
+        ?string $content,
         DateTime $createdAt,
         DateTime $updatedAt
     ) {
@@ -35,6 +36,7 @@ class ContentOutput
         $this->previousContent = $previousContent;
         $this->nextContent = $nextContent;
         $this->type = $type;
+        $this->content = $content;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
     }

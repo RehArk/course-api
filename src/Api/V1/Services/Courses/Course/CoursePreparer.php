@@ -9,6 +9,8 @@ class CoursePreparer implements PreparerInterface {
 
     public function prepare(mixed $input): mixed
     {
-        return new PreparedCourseInput();
+        return new PreparedCourseInput(
+            $input->default_title
+        );
     }
 }

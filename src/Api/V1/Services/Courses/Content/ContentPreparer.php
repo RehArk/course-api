@@ -7,6 +7,7 @@ use App\Api\V1\Services\PreparerInterface;
 use App\Repository\ChapterRepository;
 use App\Repository\ContentRepository;
 use App\Repository\ContentTypeRepository;
+use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ContentPreparer implements PreparerInterface
@@ -15,15 +16,18 @@ class ContentPreparer implements PreparerInterface
     private ChapterRepository $chapterRepository;
     private ContentRepository $contentRepository;
     private ContentTypeRepository $contentTypeRepository;
+    private HtmlSanitizerInterface $htmlSanitizer;
 
     public function __construct(
         ChapterRepository $chapterRepository,
         ContentRepository $contentRepository,
-        ContentTypeRepository $contentTypeRepository
+        ContentTypeRepository $contentTypeRepository,
+        HtmlSanitizerInterface $htmlSanitizer
     ) {
         $this->chapterRepository = $chapterRepository;
         $this->contentRepository = $contentRepository;
         $this->contentTypeRepository = $contentTypeRepository;
+        $this->htmlSanitizer = $htmlSanitizer;
     }
 
     public function prepare(mixed $input): mixed
@@ -59,11 +63,15 @@ class ContentPreparer implements PreparerInterface
             'nextContent' => null
         ]);
 
+        $unsafeContent = $input->default_content;
+        $safeContent = $this->htmlSanitizer->sanitize($unsafeContent);
+
         return new PreparedContentInput(
             $chapter,
             $parentContent,
             $previousContent,
-            $contentType
+            $contentType,
+            $safeContent
         );
     }
 }

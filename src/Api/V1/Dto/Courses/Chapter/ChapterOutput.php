@@ -11,6 +11,7 @@ class ChapterOutput {
     public string $course;
     public ?string $previousChapter;
     public ?string $nextChapter;
+    public ?string $title;
     public DateTime $createdAt;
     public DateTime $updatedAt;
 
@@ -19,6 +20,7 @@ class ChapterOutput {
         string $course,
         ?string $previousChapter,
         ?string $nextChapter,
+        ?string $title,
         DateTime $createdAt,
         DateTime $updatedAt
     ) {
@@ -26,6 +28,7 @@ class ChapterOutput {
         $this->course = $course;
         $this->previousChapter = $previousChapter;
         $this->nextChapter = $nextChapter;
+        $this->title = $title;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
     }

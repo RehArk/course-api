@@ -7,7 +7,7 @@ use ApiPlatform\State\ProcessorInterface;
 use App\Api\V1\Mapper\Courses\Content\ContentMapper;
 use App\Api\V1\Services\Courses\Content\ContentPreparer;
 use App\Entity\Content;
-use App\Entity\Translation;
+use App\Factory\TranslationFactory;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -16,13 +16,18 @@ class ContentProcessor implements ProcessorInterface
 
     private EntityManagerInterface $em;
     private ContentPreparer $preparer;
+    private TranslationFactory $translationFactory;
+
 
     public function __construct(
         EntityManagerInterface $em,
-        ContentPreparer $preparer
+        ContentPreparer $preparer,
+        TranslationFactory $translationFactory
+
     ) {
         $this->em = $em;
         $this->preparer = $preparer;
+        $this->translationFactory = $translationFactory;
     }
 
     public function process(
@@ -35,13 +40,16 @@ class ContentProcessor implements ProcessorInterface
         /** @var \App\Api\V1\Dto\Courses\Content\PreparedContentInput */
         $preparedInput = $this->preparer->prepare($data);
 
+        $defaultTranslation = $this->translationFactory
+            ->createWithDefaultEnglishText($preparedInput->defaultContent);
+
         $content = new Content();
         $content
             ->setChapter($preparedInput->chapter)
             ->setType($preparedInput->contentType)
             ->setParentContent($preparedInput->parentContent)
             ->setPreviousContent($preparedInput->previousContent)
-            ->setTranslation(new Translation())
+            ->setTranslation($defaultTranslation)
             ->setCreatedAt(new DateTime())
             ->setUpdatedAt(new DateTime())
         ;
