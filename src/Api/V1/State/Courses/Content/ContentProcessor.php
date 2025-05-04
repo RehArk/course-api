@@ -5,32 +5,24 @@ namespace App\Api\V1\State\Courses\Content;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Api\V1\Mapper\Courses\Content\ContentMapper;
+use App\Api\V1\Services\Courses\Content\ContentPreparer;
 use App\Entity\Content;
 use App\Entity\Translation;
-use App\Repository\ChapterRepository;
-use App\Repository\ContentRepository;
-use App\Repository\ContentTypeRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ContentProcessor implements ProcessorInterface {
+class ContentProcessor implements ProcessorInterface
+{
 
     private EntityManagerInterface $em;
-    private ChapterRepository $chapterRepository;
-    private ContentRepository $contentRepository;
-    private ContentTypeRepository $contentTypeRepository;
+    private ContentPreparer $preparer;
 
     public function __construct(
         EntityManagerInterface $em,
-        ChapterRepository $chapterRepository,
-        ContentRepository $contentRepository,
-        ContentTypeRepository $contentTypeRepository
+        ContentPreparer $preparer
     ) {
         $this->em = $em;
-        $this->chapterRepository = $chapterRepository;
-        $this->contentRepository = $contentRepository;
-        $this->contentTypeRepository = $contentTypeRepository;
+        $this->preparer = $preparer;
     }
 
     public function process(
@@ -40,51 +32,23 @@ class ContentProcessor implements ProcessorInterface {
         array $context = []
     ) {
 
-        /** @var \App\Entity\Chapter */
-        $chapter = $this->chapterRepository->findOneBy([
-            'id' => $data->chapter_id
-        ]);
-
-        if(!$chapter) {
-            throw new NotFoundHttpException('Chapter not found');
-        }
-
-        /** @var \App\Entity\Content */
-        $parentContent = $this->contentRepository->findOneBy([
-            'chapter' => $chapter->getId(),
-            'id' => $data->parent_id
-        ]);
-
-        /** @var \App\Entity\ContentType */
-        $contentType = $this->contentTypeRepository->findOneBy([
-            'id' => $data->content_type_id,
-        ]);
-
-        if(!$contentType) {
-            throw new NotFoundHttpException('Content type not found');
-        }
-
-        /** @var \App\Entity\Content */
-        $previousContent = $this->contentRepository->findOneBy([
-            'chapter' => $chapter->getId(),
-            'parentContent' => $parentContent?->getId(),
-            'nextContent' => null
-        ]);
+        /** @var \App\Api\V1\Dto\Courses\Content\PreparedContentInput */
+        $preparedInput = $this->preparer->prepare($data);
 
         $content = new Content();
         $content
-            ->setChapter($chapter)
-            ->setType($contentType)
-            ->setParentContent($parentContent)
-            ->setPreviousContent($previousContent)
+            ->setChapter($preparedInput->chapter)
+            ->setType($preparedInput->contentType)
+            ->setParentContent($preparedInput->parentContent)
+            ->setPreviousContent($preparedInput->previousContent)
             ->setTranslation(new Translation())
             ->setCreatedAt(new DateTime())
             ->setUpdatedAt(new DateTime())
         ;
 
-        if($previousContent) {
-            $previousContent->setNextContent($content);
-            $this->em->persist($previousContent);
+        if ($preparedInput->previousContent) {
+            $preparedInput->previousContent->setNextContent($content);
+            $this->em->persist($preparedInput->previousContent);
         }
 
         $this->em->persist($content);
@@ -92,5 +56,4 @@ class ContentProcessor implements ProcessorInterface {
 
         return ContentMapper::fromEntity($content);
     }
-
 }

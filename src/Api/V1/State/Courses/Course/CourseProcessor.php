@@ -5,6 +5,7 @@ namespace App\Api\V1\State\Courses\Course;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Api\V1\Mapper\Courses\Course\CourseMapper;
+use App\Api\V1\Services\Courses\Course\CoursePreparer;
 use App\Entity\Course;
 use App\Entity\Translation;
 use DateTime;
@@ -14,11 +15,14 @@ class CourseProcessor implements ProcessorInterface
 {
 
     private EntityManagerInterface $em;
+    private CoursePreparer $preparer;
 
     public function __construct(
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        CoursePreparer $preparer
     ) {
         $this->em = $em;
+        $this->preparer = $preparer;
     }
 
     public function process(
@@ -27,6 +31,9 @@ class CourseProcessor implements ProcessorInterface
         array $uriVariables = [],
         array $context = []
     ) {
+
+        /** @var \App\Api\V1\Dto\Courses\Course\PreparedCourseInput */
+        $preparedInput = $this->preparer->prepare($data);
 
         $course = new Course();
         $course
