@@ -6,6 +6,9 @@ use App\Entity\Chapter;
 use App\Entity\Content;
 use App\Entity\ContentType;
 
+/**
+ * @codeCoverageIgnore
+ */
 class PreparedContentInput
 {
     public Chapter $chapter;

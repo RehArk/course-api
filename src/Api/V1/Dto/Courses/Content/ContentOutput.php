@@ -2,11 +2,11 @@
 
 namespace App\Api\V1\Dto\Courses\Content;
 
-use App\Entity\Chapter;
-use App\Entity\Content;
-use App\Entity\ContentType;
 use DateTime;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ContentOutput
 {
     public string $id;

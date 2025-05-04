@@ -2,6 +2,9 @@
 
 namespace App\Api\V1\Dto\Courses\ContentType;
 
+/**
+ * @codeCoverageIgnore
+ */
 class PreparedContentTypeInput {
 
     public string $name;

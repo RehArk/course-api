@@ -2,13 +2,16 @@
 
 namespace App\Api\V1\Dto\Courses\ContentType;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ContentTypeOutput {
     
-    public string $id;
+    public int $id;
     public string $name;
 
     public function __construct(
-        string $id,
+        int $id,
         string $name
     ) {
         $this->id = $id;

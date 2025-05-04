@@ -22,6 +22,6 @@ class ContentInput
     public int $content_type_id;
 
     #[NotNull()]
-    #[NotBlank()]
+    #[NotBlank(['normalizer' => 'trim'])]
     public string $default_content;
 }

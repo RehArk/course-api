@@ -25,6 +25,15 @@ class ContentTypeProcessor implements ProcessorInterface
         $this->preparer = $preparer;
     }
 
+    /**
+     * Handles the state.
+     *
+     * @param T1                                                                                                                        $data
+     * @param array<string, mixed>                                                                                                      $uriVariables
+     * @param array<string, mixed>&array{request?: Request, previous_data?: mixed, resource_class?: string|null, original_data?: mixed} $context
+     *
+     * @return T2
+     */
     public function process(
         mixed $data,
         Operation $operation,
