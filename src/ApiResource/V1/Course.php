@@ -5,10 +5,10 @@ namespace App\ApiResource\V1;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
-use App\Api\V1\Dto\Course\CourseInput;
-use App\Api\V1\Dto\Course\CourseOutput;
-use App\Api\V1\State\Course\CourseProcessor;
-use App\Api\V1\State\Course\CourseProvider;
+use App\Api\V1\Dto\Courses\Course\CourseInput;
+use App\Api\V1\Dto\Courses\Course\CourseOutput;
+use App\Api\V1\State\Courses\Course\CourseProcessor;
+use App\Api\V1\State\Courses\Course\CourseProvider;
 use App\Entity\Translation;
 use DateTime;
 

@@ -6,10 +6,10 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
-use App\Api\V1\Dto\ContentType\ContentTypeInput;
-use App\Api\V1\Dto\ContentType\ContentTypeOutput;
-use App\Api\V1\State\ContentType\ContentTypeProcessor;
-use App\Api\V1\State\ContentType\ContentTypeProvider;
+use App\Api\V1\Dto\Courses\ContentType\ContentTypeInput;
+use App\Api\V1\Dto\Courses\ContentType\ContentTypeOutput;
+use App\Api\V1\State\Courses\ContentType\ContentTypeProcessor;
+use App\Api\V1\State\Courses\ContentType\ContentTypeProvider;
 
 #[ApiResource(
     routePrefix: '/v1',

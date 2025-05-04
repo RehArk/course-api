@@ -5,10 +5,10 @@ namespace App\ApiResource\V1;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
-use App\Api\V1\Dto\Content\ContentInput;
-use App\Api\V1\Dto\Content\ContentOutput;
-use App\Api\V1\State\Content\ContentProcessor;
-use App\Api\V1\State\Content\ContentProvider;
+use App\Api\V1\Dto\Courses\Content\ContentInput;
+use App\Api\V1\Dto\Courses\Content\ContentOutput;
+use App\Api\V1\State\Courses\Content\ContentProcessor;
+use App\Api\V1\State\Courses\Content\ContentProvider;
 use App\Entity\Translation;
 use DateTime;
 
