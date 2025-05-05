@@ -12,6 +12,10 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 #[ORM\Table(name: "translations")]
 class Translation
 {
+
+    /**
+     * @codeCoverageStart
+     */
     #[ORM\Id]
     #[ORM\Column(type: 'guid')]
     #[ORM\GeneratedValue(strategy: "CUSTOM")]
@@ -31,26 +35,13 @@ class Translation
         return $this->id;
     }
 
-    public function getText(
-        ?string $locale = null
-    ): ?string {
-
-        $locale = $locale ?? \Locale::getDefault();
-
-        $text = $this->getTranslationTexts()->filter(
-            fn($text) => $text->getLanguage()->getCode() === $locale
-        )->first() ?: null;
-        
-        return $text?->getText();
-    }
-
     public function getTranslationTexts(): Collection
     {
         return $this->translationTexts;
     }
 
     public function addTranslationText(TranslationText $translationText): self
-    {       
+    {
         if (!$this->translationTexts->contains($translationText)) {
             $this->translationTexts->add($translationText);
             $translationText->setTranslation($this);
@@ -68,5 +59,22 @@ class Translation
         }
 
         return $this;
+    }
+
+    /**
+     * @codeCoverageEnd
+     */
+
+    public function getText(
+        ?string $locale = null
+    ): ?string {
+
+        $locale = $locale ?? \Locale::getDefault();
+
+        $text = $this->getTranslationTexts()->filter(
+            fn($text) => $text->getLanguage()->getCode() === $locale
+        )->first() ?: null;
+
+        return $text?->getText();
     }
 }

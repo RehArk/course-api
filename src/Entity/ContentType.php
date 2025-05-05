@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\ContentTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @codeCoverageIgnore
+ */
 #[ORM\Entity(repositoryClass: ContentTypeRepository::class)]
 #[ORM\Table(name: "content_types")]
 class ContentType

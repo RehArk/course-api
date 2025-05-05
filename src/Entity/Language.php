@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\LanguageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @codeCoverageIgnore
+ */
 #[ORM\Entity(repositoryClass: LanguageRepository::class)]
 #[ORM\Table(name: "languages")]
 #[ORM\Index(columns: ["code"], name: "languages_index_code")]

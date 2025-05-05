@@ -6,6 +6,9 @@ use App\Repository\TranslationTextRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 
+/**
+ * @codeCoverageIgnore
+ */
 #[ORM\Entity(repositoryClass: TranslationTextRepository::class)]
 #[ORM\Table(name: "translation_texts")]
 #[ORM\Index(columns: ["translation_id"], name: "translation_texts_index_translation_id")]

@@ -7,6 +7,9 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 
+/**
+ * @codeCoverageIgnore
+ */
 #[ORM\Entity(repositoryClass: CourseRepository::class)]
 #[ORM\Table(name: "courses")]
 #[ORM\Index(columns: ["translation_id"], name: "courses_index_translation_id")]
