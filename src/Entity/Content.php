@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ContentRepository;
+use App\Utils\Translation\TranslatableEntityInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
@@ -18,7 +19,7 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 #[ORM\Index(columns: ["next_content_id"], name: "contents_index_next_content_id")]
 #[ORM\Index(columns: ["translation_id"], name: "contents_index_translation_id")]
 #[ORM\Index(columns: ["type_id"], name: "contents_index_type_id")]
-class Content
+class Content implements TranslatableEntityInterface
 {
     #[ORM\Id]
     #[ORM\Column(type: 'guid')]

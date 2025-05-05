@@ -5,10 +5,14 @@ namespace App\ApiResource\V1;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
+use App\Api\Utils\ApiResourceInterface;
 use App\Api\V1\Dto\Courses\Content\ContentInput;
 use App\Api\V1\Dto\Courses\Content\ContentOutput;
+use App\Api\V1\Dto\Translation\TranslationInput;
 use App\Api\V1\State\Courses\Content\ContentProcessor;
 use App\Api\V1\State\Courses\Content\ContentProvider;
+use App\Api\V1\State\Translation\TranslationProcessor;
+use App\Entity\Content as EntityContent;
 use App\Entity\Translation;
 use DateTime;
 
@@ -25,10 +29,17 @@ use DateTime;
             output: ContentOutput::class,
             processor: ContentProcessor::class,
             name: 'create_content'
+        ),
+        new Post(
+            uriTemplate: '/contents/{id}/translation',
+            controller: null,
+            processor: TranslationProcessor::class,
+            input: TranslationInput::class,
+            name: 'create_or_update_content_translation'
         )
     ]
 )]
-class Content
+class Content implements ApiResourceInterface
 {
     private string $id;
     private Chapter $chapter;
@@ -39,4 +50,8 @@ class Content
     private ContentType $type;
     private DateTime $createdAt;
     private DateTime $updatedAt;
+
+    public static function getEntityClass() : string {
+        return EntityContent::class;
+    }
 }

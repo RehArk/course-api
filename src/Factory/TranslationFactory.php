@@ -35,4 +35,25 @@ class TranslationFactory
 
         return $translation;
     }
+
+    public function findOrCreate(
+        Translation $translation,
+        Language $language
+    ): TranslationText {
+
+        $translationText = $translation->getTranslationText($language->getCode());
+
+        if($translationText) {
+            return $translationText;
+        }
+
+        $translationText = new TranslationText();
+
+            $translationText
+                ->setTranslation($translation)
+                ->setLanguage($language)
+            ;
+
+        return $translationText;
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ChapterRepository;
+use App\Utils\Translation\TranslatableEntityInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
@@ -16,7 +17,7 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 #[ORM\Index(columns: ['translation_id'], name: 'chapters_index_translation_id')]
 #[ORM\Index(columns: ['previous_chapter_id'], name: 'chapters_index_previous_chapter_id')]
 #[ORM\Index(columns: ['next_chapter_id'], name: 'chapters_index_next_chapter_id')]
-class Chapter
+class Chapter implements TranslatableEntityInterface
 {
     #[ORM\Id]
     #[ORM\Column(type: 'guid')]

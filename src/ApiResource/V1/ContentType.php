@@ -6,10 +6,12 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use App\Api\Utils\ApiResourceInterface;
 use App\Api\V1\Dto\Courses\ContentType\ContentTypeInput;
 use App\Api\V1\Dto\Courses\ContentType\ContentTypeOutput;
 use App\Api\V1\State\Courses\ContentType\ContentTypeProcessor;
 use App\Api\V1\State\Courses\ContentType\ContentTypeProvider;
+use App\Entity\ContentType as EntityContentType;
 
 #[ApiResource(
     routePrefix: '/v1',
@@ -32,8 +34,12 @@ use App\Api\V1\State\Courses\ContentType\ContentTypeProvider;
         )
     ]
 )]
-class ContentType
+class ContentType implements ApiResourceInterface
 {
     private int $id;
     private string $name;
+
+    public static function getEntityClass() : string {
+        return EntityContentType::class;
+    }
 }

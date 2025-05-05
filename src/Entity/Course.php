@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CourseRepository;
+use App\Utils\Translation\TranslatableEntityInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
@@ -13,7 +14,7 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 #[ORM\Entity(repositoryClass: CourseRepository::class)]
 #[ORM\Table(name: "courses")]
 #[ORM\Index(columns: ["translation_id"], name: "courses_index_translation_id")]
-class Course
+class Course implements TranslatableEntityInterface
 {
     #[ORM\Id]
     #[ORM\Column(type: 'guid')]

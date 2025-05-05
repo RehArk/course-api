@@ -65,16 +65,22 @@ class Translation
      * @codeCoverageEnd
      */
 
-    public function getText(
+    public function getTranslationText(
         ?string $locale = null
-    ): ?string {
+    ): ?TranslationText {
 
         $locale = $locale ?? \Locale::getDefault();
 
-        $text = $this->getTranslationTexts()->filter(
-            fn($text) => $text->getLanguage()->getCode() === $locale
+        $translationText = $this->getTranslationTexts()->filter(
+            fn($translationText) => $translationText->getLanguage()->getCode() === $locale
         )->first() ?: null;
 
-        return $text?->getText();
+        return $translationText;
+    }
+
+    public function getText(
+        ?string $locale = null
+    ): ?string {
+        return $this->getTranslationText($locale)?->getText();
     }
 }
