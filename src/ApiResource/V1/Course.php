@@ -16,7 +16,6 @@ use DateTime;
     routePrefix: '/v1',
     operations: [
         new Get(
-            uriTemplate: '/courses/{id}',
             output: CourseOutput::class,
             provider: CourseProvider::class,
             name: 'get_course_by_id'

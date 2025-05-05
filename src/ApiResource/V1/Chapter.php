@@ -16,7 +16,6 @@ use DateTime;
     routePrefix: '/v1',
     operations: [
         new Get(
-            uriTemplate: '/chapters/{id}',
             output: ChapterOutput::class,
             provider: ChapterProvider::class,
             name: 'get_chapter_by_id'
