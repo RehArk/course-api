@@ -18,7 +18,7 @@ class ContentTypeMapperTest extends TestCase
         $contentType->method('getId')->willReturn($id);
         $contentType->method('getName')->willReturn($name);
 
-        $dto = ContentTypeMapper::fromEntity($contentType);
+        $dto = (new ContentTypeMapper)->fromEntity($contentType);
 
         $this->assertInstanceOf(ContentTypeOutput::class, $dto);
         $this->assertSame($id, $dto->id);
@@ -36,7 +36,7 @@ class ContentTypeMapperTest extends TestCase
         $contentType2->method('getId')->willReturn(2);
         $contentType2->method('getName')->willReturn('paragraph');
 
-        $result = ContentTypeMapper::fromArray([$contentType1, $contentType2]);
+        $result = (new ContentTypeMapper)->fromArray([$contentType1, $contentType2]);
 
         $this->assertCount(2, $result);
         $this->assertContainsOnlyInstancesOf(ContentTypeOutput::class, $result);

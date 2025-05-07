@@ -46,7 +46,7 @@ class ContentMapperTest extends TestCase
         $content->method('getCreatedAt')->willReturn($createdAt);
         $content->method('getUpdatedAt')->willReturn($updatedAt);
 
-        $dto = ContentMapper::fromEntity($content);
+        $dto = (new ContentMapper)->fromEntity($content);
         
         $this->assertInstanceOf(ContentOutput::class, $dto);
         $this->assertSame($chapter_id, $dto->chapter);

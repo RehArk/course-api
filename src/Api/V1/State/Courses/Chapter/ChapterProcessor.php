@@ -17,16 +17,18 @@ class ChapterProcessor implements ProcessorInterface
     private EntityManagerInterface $em;
     private ChapterPreparer $preparer;
     private TranslationFactory $translationFactory;
-
+    private ChapterMapper $mapper;
 
     public function __construct(
         EntityManagerInterface $em,
         ChapterPreparer $preparer,
-        TranslationFactory $translationFactory
+        TranslationFactory $translationFactory,
+        ChapterMapper $mapper
     ) {
         $this->em = $em;
         $this->preparer = $preparer;
         $this->translationFactory = $translationFactory;
+        $this->mapper = $mapper;
     }
 
     /**
@@ -47,7 +49,6 @@ class ChapterProcessor implements ProcessorInterface
 
         /** @var \App\Api\V1\Dto\Courses\Chapter\PreparedChapterInput */
         $preparedInput = $this->preparer->prepare($data);
-
 
         $defaultTranslation = $this->translationFactory
             ->createWithDefaultEnglishText($preparedInput->defaultTitle)
@@ -70,6 +71,6 @@ class ChapterProcessor implements ProcessorInterface
         $this->em->persist($chapter);
         $this->em->flush();
 
-        return ChapterMapper::fromEntity($chapter);
+        return $this->mapper->fromEntity($chapter);
     }
 }

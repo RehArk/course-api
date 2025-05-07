@@ -7,13 +7,13 @@ use App\Entity\ContentType;
 
 class ContentTypeMapper {
 
-    static function fromArray(
+    public function fromArray(
         array $contentTypes
     ) {
         return array_map([self::class, 'fromEntity'], $contentTypes);
     }
 
-    static function fromEntity(
+    public function fromEntity(
         ContentType $contentType
     ) : ContentTypeOutput {
         return new ContentTypeOutput(

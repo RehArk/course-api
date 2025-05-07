@@ -17,17 +17,19 @@ class CourseProcessor implements ProcessorInterface
     private EntityManagerInterface $em;
     private CoursePreparer $preparer;
     private TranslationFactory $translationFactory;
+    private CourseMapper $mapper;
 
 
     public function __construct(
         EntityManagerInterface $em,
         CoursePreparer $preparer,
-        TranslationFactory $translationFactory
-
+        TranslationFactory $translationFactory,
+        CourseMapper $mapper
     ) {
         $this->em = $em;
         $this->preparer = $preparer;
         $this->translationFactory = $translationFactory;
+        $this->mapper = $mapper;
     }
 
     /**
@@ -62,6 +64,6 @@ class CourseProcessor implements ProcessorInterface
         $this->em->persist($course);
         $this->em->flush();
 
-        return CourseMapper::fromEntity($course);
+        return $this->mapper->fromEntity($course);
     }
 }

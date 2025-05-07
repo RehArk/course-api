@@ -7,7 +7,7 @@ use App\Entity\Course;
 
 class CourseMapper
 {
-    public static function fromEntity(Course $course): CourseOutput
+    public function fromEntity(Course $course): CourseOutput
     {
         return new CourseOutput(
             $course->getId(),

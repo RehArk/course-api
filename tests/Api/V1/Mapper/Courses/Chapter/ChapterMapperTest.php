@@ -43,7 +43,7 @@ class ChapterMapperTest extends TestCase
         $chapter->method('getCreatedAt')->willReturn($createdAt);
         $chapter->method('getUpdatedAt')->willReturn($updatedAt);
 
-        $dto = ChapterMapper::fromEntity($chapter);
+        $dto = (new ChapterMapper)->fromEntity($chapter);
 
         $this->assertInstanceOf(ChapterOutput::class, $dto);
         $this->assertSame($chapterId, $dto->id);

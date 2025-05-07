@@ -7,7 +7,7 @@ use App\Entity\Content;
 
 class ContentMapper {
 
-    public static function fromEntity(
+    public function fromEntity(
         Content $content
     ) : ContentOutput {
         return new ContentOutput(

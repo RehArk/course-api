@@ -17,17 +17,19 @@ class ContentProcessor implements ProcessorInterface
     private EntityManagerInterface $em;
     private ContentPreparer $preparer;
     private TranslationFactory $translationFactory;
+    private ContentMapper $mapper;
 
 
     public function __construct(
         EntityManagerInterface $em,
         ContentPreparer $preparer,
-        TranslationFactory $translationFactory
-
+        TranslationFactory $translationFactory,
+        ContentMapper $mapper
     ) {
         $this->em = $em;
         $this->preparer = $preparer;
         $this->translationFactory = $translationFactory;
+        $this->mapper = $mapper;
     }
 
     /**
@@ -71,6 +73,6 @@ class ContentProcessor implements ProcessorInterface
         $this->em->persist($content);
         $this->em->flush();
 
-        return ContentMapper::fromEntity($content);
+        return $this->mapper->fromEntity($content);
     }
 }

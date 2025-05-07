@@ -28,7 +28,7 @@ class CourseMapperTest extends TestCase
         $course->method('getUpdatedAt')->willReturn($updatedAt);
 
         /** @var \PHPUnit\Framework\MockObject\MockObject&\App\Entity\Course $course */
-        $dto = CourseMapper::fromEntity($course);
+        $dto = (new CourseMapper)->fromEntity($course);
 
         $this->assertInstanceOf(CourseOutput::class, $dto);
         $this->assertSame($courseId, $dto->id);

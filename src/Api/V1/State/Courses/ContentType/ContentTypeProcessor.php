@@ -14,15 +14,17 @@ class ContentTypeProcessor implements ProcessorInterface
 
     private EntityManagerInterface $em;
     private ContentTypePreparer $preparer;
+    private ContentTypeMapper $mapper;
 
 
     public function __construct(
         EntityManagerInterface $em,
-        ContentTypePreparer $preparer
-
+        ContentTypePreparer $preparer,
+        ContentTypeMapper $mapper
     ) {
         $this->em = $em;
         $this->preparer = $preparer;
+        $this->mapper = $mapper;
     }
 
     /**
@@ -50,6 +52,6 @@ class ContentTypeProcessor implements ProcessorInterface
         $this->em->persist($contentType);
         $this->em->flush();
 
-        return ContentTypeMapper::fromEntity($contentType);
+        return $this->mapper->fromEntity($contentType);
     }
 }

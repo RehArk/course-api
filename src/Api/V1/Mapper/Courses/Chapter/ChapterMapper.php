@@ -6,7 +6,7 @@ use App\Api\V1\Dto\Courses\Chapter\ChapterOutput;
 use App\Entity\Chapter;
 class ChapterMapper
 {
-    public static function fromEntity(Chapter $chapter): ChapterOutput
+    public function fromEntity(Chapter $chapter): ChapterOutput
     {
         return new ChapterOutput(
             $chapter->getId(),
