@@ -49,10 +49,10 @@ class TranslationFactory
 
         $translationText = new TranslationText();
 
-            $translationText
-                ->setTranslation($translation)
-                ->setLanguage($language)
-            ;
+        $translationText
+            ->setTranslation($translation)
+            ->setLanguage($language)
+        ;
 
         return $translationText;
     }

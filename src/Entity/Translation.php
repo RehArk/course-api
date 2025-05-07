@@ -13,9 +13,7 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 class Translation
 {
 
-    /**
-     * @codeCoverageStart
-     */
+    // @codeCoverageIgnoreStart
     #[ORM\Id]
     #[ORM\Column(type: 'guid')]
     #[ORM\GeneratedValue(strategy: "CUSTOM")]
@@ -61,9 +59,7 @@ class Translation
         return $this;
     }
 
-    /**
-     * @codeCoverageEnd
-     */
+    // @codeCoverageIgnoreEnd
 
     public function getTranslationText(
         ?string $locale = null
