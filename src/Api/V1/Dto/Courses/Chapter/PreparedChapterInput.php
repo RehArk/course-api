@@ -5,9 +5,6 @@ namespace App\Api\V1\Dto\Courses\Chapter;
 use App\Entity\Chapter;
 use App\Entity\Course;
 
-/**
- * @codeCoverageIgnore
- */
 class PreparedChapterInput
 {
 

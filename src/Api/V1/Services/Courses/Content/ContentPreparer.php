@@ -31,7 +31,7 @@ class ContentPreparer implements PreparerInterface
     }
 
     public function prepare(mixed $input): mixed
-    {
+    {        
         /** @var \App\Entity\Chapter */
         $chapter = $this->chapterRepository->findOneBy([
             'id' => $input->chapter_id

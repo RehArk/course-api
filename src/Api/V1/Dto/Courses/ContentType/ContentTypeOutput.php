@@ -2,9 +2,6 @@
 
 namespace App\Api\V1\Dto\Courses\ContentType;
 
-/**
- * @codeCoverageIgnore
- */
 class ContentTypeOutput {
     
     public int $id;

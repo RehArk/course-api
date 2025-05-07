@@ -4,9 +4,6 @@ namespace App\Api\V1\Dto\Courses\Content;
 
 use DateTime;
 
-/**
- * @codeCoverageIgnore
- */
 class ContentOutput
 {
     public string $id;

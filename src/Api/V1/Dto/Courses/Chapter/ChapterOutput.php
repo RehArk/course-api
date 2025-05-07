@@ -4,9 +4,6 @@ namespace App\Api\V1\Dto\Courses\Chapter;
 
 use DateTime;
 
-/**
- * @codeCoverageIgnore
- */
 class ChapterOutput {
 
     public string $id;

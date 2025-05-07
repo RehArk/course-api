@@ -5,7 +5,6 @@ namespace App\Tests\Mapper\Courses\Course;
 use App\Api\V1\Dto\Courses\Course\CourseOutput;
 use App\Api\V1\Mapper\Courses\Course\CourseMapper;
 use App\Entity\Course;
-use App\Entity\CourseTranslation;
 use App\Entity\Translation;
 use DateTime;
 use PHPUnit\Framework\TestCase;
@@ -28,6 +27,7 @@ class CourseMapperTest extends TestCase
         $course->method('getCreatedAt')->willReturn($createdAt);
         $course->method('getUpdatedAt')->willReturn($updatedAt);
 
+        /** @var \PHPUnit\Framework\MockObject\MockObject&\App\Entity\Course $course */
         $dto = CourseMapper::fromEntity($course);
 
         $this->assertInstanceOf(CourseOutput::class, $dto);
