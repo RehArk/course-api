@@ -8,29 +8,32 @@ use App\Api\V1\Mapper\Courses\Content\ContentMapper;
 use App\Repository\ContentRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ContentProvider implements ProviderInterface {
-    
+class ContentProvider implements ProviderInterface
+{
+
     private ContentRepository $repository;
+    private ContentMapper $mapper;
 
     public function __construct(
-        ContentRepository $repository
+        ContentRepository $repository,
+        ContentMapper $mapper
     ) {
-        $this->repository = $repository;    
+        $this->repository = $repository;
+        $this->mapper = $mapper;
     }
 
     public function provide(
         Operation $operation,
         array $uriVariables = [],
         array $context = []
-    ) : object|array|null {
+    ): object|array|null {
 
         $content = $this->repository->findOneBy(['id' => $uriVariables['id']]);
 
-        if(!$content) {
+        if (!$content) {
             throw new NotFoundHttpException();
         }
 
-        return ContentMapper::fromEntity($content);
+        return $this->mapper->fromEntity($content);
     }
-
 }

@@ -9,14 +9,18 @@ use App\Api\V1\Mapper\Courses\ContentType\ContentTypeMapper;
 use App\Repository\ContentTypeRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ContentTypeProvider implements ProviderInterface {
+class ContentTypeProvider implements ProviderInterface
+{
 
     private ContentTypeRepository $repository;
+    private ContentTypeMapper $mapper;
 
     public function __construct(
-        ContentTypeRepository $repository
+        ContentTypeRepository $repository,
+        ContentTypeMapper $mapper
     ) {
         $this->repository = $repository;
+        $this->mapper = $mapper;
     }
 
     public function provide(
@@ -24,7 +28,7 @@ class ContentTypeProvider implements ProviderInterface {
         array $uriVariables = [],
         array $context = []
     ): object|array|null {
-
+        
         if ($operation instanceof CollectionOperationInterface) {
             return $this->provideAll();
         }
@@ -32,10 +36,11 @@ class ContentTypeProvider implements ProviderInterface {
         return $this->provideOne($uriVariables['id']);
     }
 
-    private function provideAll() {
+    private function provideAll()
+    {
         /** @var array<\App\Entity\ContentType> */
-        $contentTypes = $contentType = $this->repository->findAll();
-        return ContentTypeMapper::fromArray($contentTypes);
+        $contentTypes = $this->repository->findAll();
+        return $this->mapper->fromArray($contentTypes);
     }
 
     private function provideOne(
@@ -43,12 +48,11 @@ class ContentTypeProvider implements ProviderInterface {
     ) {
         /** @var \App\Entity\ContentType */
         $contentType = $this->repository->findOneBy(['id' => $id]);
-                
-        if(!$contentType) {
+
+        if (!$contentType) {
             throw new NotFoundHttpException();
         }
 
-        return ContentTypeMapper::fromEntity($contentType);
+        return $this->mapper->fromEntity($contentType);
     }
-
 }

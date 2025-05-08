@@ -10,12 +10,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CourseProvider implements ProviderInterface {
 
-    private CourseRepository $repository;
+    private CourseRepository $repository;    private CourseMapper $mapper;
+
 
     public function __construct(
-        CourseRepository $repository
+        CourseRepository $repository,        CourseMapper $mapper
+
     ) {
-        $this->repository = $repository;
+        $this->repository = $repository;        $this->mapper = $mapper;
+
     }
 
     public function provide(
@@ -31,6 +34,6 @@ class CourseProvider implements ProviderInterface {
             throw new NotFoundHttpException();
         }
 
-        return CourseMapper::fromEntity($course);
+        return $this->mapper->fromEntity($course);
     }
 }

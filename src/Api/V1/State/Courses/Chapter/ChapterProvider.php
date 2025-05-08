@@ -11,11 +11,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ChapterProvider implements ProviderInterface {
 
     private ChapterRepository $repository;
+    private ChapterMapper $mapper;
 
     public function __construct(
-        ChapterRepository $repository
+        ChapterRepository $repository,
+        ChapterMapper $mapper
     ) {
         $this->repository = $repository;
+        $this->mapper = $mapper;
     }
 
     public function provide(
@@ -31,6 +34,6 @@ class ChapterProvider implements ProviderInterface {
             throw new NotFoundHttpException();
         }
 
-        return ChapterMapper::fromEntity($chapter);
+        return $this->mapper->fromEntity($chapter);
     }
 }
