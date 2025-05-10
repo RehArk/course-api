@@ -10,7 +10,7 @@ class ChapterOutput {
     public string $course;
     public ?string $previousChapter;
     public ?string $nextChapter;
-    public ?string $title;
+    public string $title;
     public DateTime $createdAt;
     public DateTime $updatedAt;
 
@@ -19,7 +19,7 @@ class ChapterOutput {
         string $course,
         ?string $previousChapter,
         ?string $nextChapter,
-        ?string $title,
+        string $title,
         DateTime $createdAt,
         DateTime $updatedAt
     ) {

@@ -12,7 +12,7 @@ class ContentOutput
     public ?string $previousContent;
     public ?string $nextContent;
     public int $type;
-    public ?string $content;
+    public string $content;
     public DateTime $createdAt;
     public DateTime $updatedAt;
 
@@ -23,7 +23,7 @@ class ContentOutput
         ?string $previousContent,
         ?string $nextContent,
         int $type,
-        ?string $content,
+        string $content,
         DateTime $createdAt,
         DateTime $updatedAt
     ) {

@@ -7,13 +7,13 @@ use DateTime;
 class CourseOutput {
 
     public string $id;
-    public ?string $title;
+    public string $title;
     public DateTime $createdAt;
     public DateTime $updatedAt;
 
     public function __construct(
         string $id,
-        ?string $title,
+        string $title,
         DateTime $createdAt,
         DateTime $updatedAt
     ) {

@@ -22,7 +22,7 @@ class ChapterProviderTest extends TestCase
             '1',
             null,
             null,
-            null,
+            'test',
             new DateTime(),
             new DateTime()
         );
