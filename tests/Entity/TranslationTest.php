@@ -35,8 +35,8 @@ class TranslationTest extends TestCase
         $this->assertSame($enText, $translation->getTranslationText('en'));
         $this->assertEquals('Hello', $translation->getText('en'));
 
-        $this->assertNull($translation->getTranslationText('de'));
-        $this->assertNull($translation->getText('de'));
+        $this->assertSame($enText, $translation->getTranslationText('de'));
+        $this->assertEquals('Hello', $translation->getText('de'));
 
         \Locale::setDefault('fr');
         $this->assertSame($frText, $translation->getTranslationText());

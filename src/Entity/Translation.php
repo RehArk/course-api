@@ -71,6 +71,14 @@ class Translation
             fn($translationText) => $translationText->getLanguage()->getCode() === $locale
         )->first() ?: null;
 
+        if($translationText) {
+            return $translationText;
+        }
+
+        $translationText = $this->getTranslationTexts()->filter(
+            fn($translationText) => $translationText->getLanguage()->getCode() === 'en'
+        )->first() ?: null;
+
         return $translationText;
     }
 
