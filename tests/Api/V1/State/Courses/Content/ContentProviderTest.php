@@ -7,7 +7,7 @@ use App\Api\V1\Mapper\Courses\Content\ContentMapper;
 use App\Entity\Content;
 use App\Repository\ContentRepository;
 use ApiPlatform\Metadata\Operation;
-use App\Api\V1\Dto\Courses\Content\ContentOutput;
+use App\ApiResource\V1\Content as ApiContent;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -21,7 +21,7 @@ class ContentProviderTest extends TestCase
         $content_type_id = 1;
         $content_text = 'Test';
 
-        $dto = new ContentOutput(
+        $dto = new ApiContent(
             $id,
             $chapter_id,
             null,

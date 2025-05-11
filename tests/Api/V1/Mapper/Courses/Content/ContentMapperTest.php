@@ -2,9 +2,8 @@
 
 namespace App\Tests\Mapper\Courses\Chapter;
 
-use App\Api\V1\Dto\Courses\Content\ContentOutput;
-use App\Api\V1\Dto\Courses\ContentType\ContentTypeOutput;
 use App\Api\V1\Mapper\Courses\Content\ContentMapper;
+use App\ApiResource\V1\Content as ApiContent;
 use App\Entity\Chapter;
 use App\Entity\Content;
 use App\Entity\ContentType;
@@ -48,7 +47,7 @@ class ContentMapperTest extends TestCase
 
         $dto = (new ContentMapper)->fromEntity($content);
         
-        $this->assertInstanceOf(ContentOutput::class, $dto);
+        $this->assertInstanceOf(ApiContent::class, $dto);
         $this->assertSame($chapter_id, $dto->chapter);
         $this->assertSame($parent_content_id, $dto->parentContent);
         $this->assertSame($previous_content_id, $dto->previousContent);

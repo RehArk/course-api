@@ -4,11 +4,11 @@ namespace App\Tests\Api\V1\State\Courses\Course;
 
 use ApiPlatform\Metadata\Operation;
 use App\Api\V1\Dto\Courses\Course\CourseInput;
-use App\Api\V1\Dto\Courses\Course\CourseOutput;
 use App\Api\V1\Dto\Courses\Course\PreparedCourseInput;
 use App\Api\V1\Mapper\Courses\Course\CourseMapper;
 use App\Api\V1\Services\Courses\Course\CoursePreparer;
 use App\Api\V1\State\Courses\Course\CourseProcessor;
+use App\ApiResource\V1\Course as ApiCourse;
 use App\Entity\Translation;
 use App\Factory\TranslationFactory;
 use DateTime;
@@ -29,7 +29,7 @@ class CourseProcessorTest extends TestCase
             $courseInput->default_title
         );
 
-        $courseOutput = new CourseOutput(
+        $courseOutput = new ApiCourse(
             '1',
             $courseInput->default_title,
             new DateTime(),

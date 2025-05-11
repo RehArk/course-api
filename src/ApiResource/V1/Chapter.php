@@ -7,7 +7,6 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use App\Api\Utils\ApiResourceInterface;
 use App\Api\V1\Dto\Courses\Chapter\ChapterInput;
-use App\Api\V1\Dto\Courses\Chapter\ChapterOutput;
 use App\Api\V1\Dto\Translation\TranslationInput;
 use App\Api\V1\State\Courses\Chapter\ChapterProcessor;
 use App\Api\V1\State\Courses\Chapter\ChapterProvider;
@@ -20,13 +19,11 @@ use DateTime;
     routePrefix: '/v1',
     operations: [
         new Get(
-            output: ChapterOutput::class,
             provider: ChapterProvider::class,
             name: 'get_chapter_by_id'
         ),
         new Post(
             input: ChapterInput::class,
-            output: ChapterOutput::class,
             processor: ChapterProcessor::class,
             name: 'create_chapter'
         ),
@@ -41,13 +38,32 @@ use DateTime;
 )]
 class Chapter implements ApiResourceInterface
 {
-    private string $id;
-    private Course $course;
-    private Translation $translation;
-    private ?Chapter $previousChapter;
-    private ?Chapter $nextChapter;
-    private DateTime $createdAt;
-    private DateTime $updatedAt;
+
+    public string $id;
+    public string $course;
+    public ?string $previousChapter;
+    public ?string $nextChapter;
+    public string $title;
+    public DateTime $createdAt;
+    public DateTime $updatedAt;
+
+    public function __construct(
+        string $id,
+        string $course,
+        ?string $previousChapter,
+        ?string $nextChapter,
+        string $title,
+        DateTime $createdAt,
+        DateTime $updatedAt
+    ) {
+        $this->id = $id;
+        $this->course = $course;
+        $this->previousChapter = $previousChapter;
+        $this->nextChapter = $nextChapter;
+        $this->title = $title;
+        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
+    }
 
     public static function getEntityClass() : string {
         return EntityChapter::class;

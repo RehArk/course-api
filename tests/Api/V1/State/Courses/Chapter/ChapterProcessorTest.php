@@ -4,11 +4,11 @@ namespace App\Tests\Api\V1\State\Courses\Chapter;
 
 use ApiPlatform\Metadata\Operation;
 use App\Api\V1\Dto\Courses\Chapter\ChapterInput;
-use App\Api\V1\Dto\Courses\Chapter\ChapterOutput;
 use App\Api\V1\Dto\Courses\Chapter\PreparedChapterInput;
 use App\Api\V1\Mapper\Courses\Chapter\ChapterMapper;
 use App\Api\V1\Services\Courses\Chapter\ChapterPreparer;
 use App\Api\V1\State\Courses\Chapter\ChapterProcessor;
+use App\ApiResource\V1\Chapter as ApiChapter;
 use App\Entity\Course;
 use App\Entity\Translation;
 use App\Factory\TranslationFactory;
@@ -39,7 +39,7 @@ class ChapterProcessorTest extends TestCase
             $chapterInput->default_title
         );
 
-        $chapterOutput = new ChapterOutput(
+        $chapterOutput = new ApiChapter(
             '1',
             '1',
             null,

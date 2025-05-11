@@ -2,13 +2,20 @@
 
 namespace App\Api\V1\Mapper\Courses\Chapter;
 
-use App\Api\V1\Dto\Courses\Chapter\ChapterOutput;
+use App\ApiResource\V1\Chapter as ApiChapter;
 use App\Entity\Chapter;
-class ChapterMapper
+use App\Utils\Mapper\AbstractMapper;
+
+class ChapterMapper extends AbstractMapper
 {
-    public function fromEntity(Chapter $chapter): ChapterOutput
+    /**
+     * @param Chapter $entity
+     * 
+     * @return ApiChapter
+     */
+    public function fromEntity(mixed $chapter): mixed
     {
-        return new ChapterOutput(
+        return new ApiChapter(
             $chapter->getId(),
             $chapter->getCourse()->getId(),
             $chapter->getPreviousChapter()?->getId(),

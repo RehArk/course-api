@@ -7,9 +7,8 @@ use App\Api\V1\Mapper\Courses\ContentType\ContentTypeMapper;
 use App\Entity\ContentType;
 use App\Repository\ContentTypeRepository;
 use ApiPlatform\Metadata\Operation;
-use ApiPlatform\Metadata\CollectionOperation;
 use ApiPlatform\Metadata\GetCollection;
-use App\Api\V1\Dto\Courses\ContentType\ContentTypeOutput;
+use App\ApiResource\V1\ContentType as ApiContentType;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -21,7 +20,7 @@ class ContentTypeProviderTest extends TestCase
         $id = 1;
         $name = 'Title';
 
-        $dto = new ContentTypeOutput(
+        $dto = new ApiContentType(
             $id,
             $name
         );
@@ -86,12 +85,12 @@ class ContentTypeProviderTest extends TestCase
         $id_2 = 2;
         $name_2 = 'Paragraph';
 
-        $dto1 = new ContentTypeOutput(
+        $dto1 = new ApiContentType(
             $id_1,
             $name_1
         );
 
-        $dto2 = new ContentTypeOutput(
+        $dto2 = new ApiContentType(
             $id_2,
             $name_2
         );

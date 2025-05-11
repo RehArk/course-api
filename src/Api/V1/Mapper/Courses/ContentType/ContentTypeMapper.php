@@ -2,21 +2,23 @@
 
 namespace App\Api\V1\Mapper\Courses\ContentType;
 
-use App\Api\V1\Dto\Courses\ContentType\ContentTypeOutput;
+use App\ApiResource\V1\ContentType as ApiContentType;
 use App\Entity\ContentType;
+use App\Utils\Mapper\AbstractMapper;
 
-class ContentTypeMapper {
+class ContentTypeMapper extends AbstractMapper
+{
 
-    public function fromArray(
-        array $contentTypes
-    ) {
-        return array_map([self::class, 'fromEntity'], $contentTypes);
-    }
-
+    /**
+     * @param ContentType $entity
+     * 
+     * @return ApiContentType
+     */
     public function fromEntity(
-        ContentType $contentType
-    ) : ContentTypeOutput {
-        return new ContentTypeOutput(
+        mixed $contentType
+    ): mixed {
+
+        return new ApiContentType(
             $contentType->getId(),
             $contentType->getName()
         );

@@ -2,8 +2,8 @@
 
 namespace App\Tests\Mapper\Courses\ContentType;
 
-use App\Api\V1\Dto\Courses\ContentType\ContentTypeOutput;
 use App\Api\V1\Mapper\Courses\ContentType\ContentTypeMapper;
+use App\ApiResource\V1\ContentType as ApiContentType;
 use App\Entity\ContentType;
 use PHPUnit\Framework\TestCase;
 
@@ -20,7 +20,7 @@ class ContentTypeMapperTest extends TestCase
 
         $dto = (new ContentTypeMapper)->fromEntity($contentType);
 
-        $this->assertInstanceOf(ContentTypeOutput::class, $dto);
+        $this->assertInstanceOf(ApiContentType::class, $dto);
         $this->assertSame($id, $dto->id);
         $this->assertSame($name, $dto->name);
     }
@@ -39,7 +39,7 @@ class ContentTypeMapperTest extends TestCase
         $result = (new ContentTypeMapper)->fromArray([$contentType1, $contentType2]);
 
         $this->assertCount(2, $result);
-        $this->assertContainsOnlyInstancesOf(ContentTypeOutput::class, $result);
+        $this->assertContainsOnlyInstancesOf(ApiContentType::class, $result);
 
         $this->assertSame(1, $result[0]->id);
         $this->assertSame('title', $result[0]->name);

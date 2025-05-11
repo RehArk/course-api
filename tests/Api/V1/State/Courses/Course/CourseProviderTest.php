@@ -7,9 +7,10 @@ use App\Api\V1\Mapper\Courses\Course\CourseMapper;
 use App\Entity\Course;
 use App\Repository\CourseRepository;
 use ApiPlatform\Metadata\Operation;
-use App\Api\V1\Dto\Courses\Course\CourseOutput;
+use App\ApiResource\V1\Course as ApiCourse;
 use DateTime;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CourseProviderTest extends TestCase
@@ -20,7 +21,7 @@ class CourseProviderTest extends TestCase
         $title = 'Title';
 
         $course = $this->createMock(Course::class);
-        $dto = new CourseOutput(
+        $dto = new ApiCourse(
             $id,
             $title,
             new DateTime(),
@@ -41,7 +42,10 @@ class CourseProviderTest extends TestCase
             ->with($course)
             ->willReturn($dto);
 
-        $provider = new CourseProvider($repository, $mapper);
+        /** @var \PHPUnit\Framework\MockObject\MockObject&\Symfony\Component\HttpFoundation\RequestStack $requestStack */
+        $requestStack = $this->createMock(RequestStack::class);
+
+        $provider = new CourseProvider($repository, $mapper, $requestStack);
 
         /** @var \PHPUnit\Framework\MockObject\MockObject&\ApiPlatform\Metadata\Operation $operation */
         $operation = $this->createMock(Operation::class);
@@ -66,7 +70,10 @@ class CourseProviderTest extends TestCase
         /** @var \PHPUnit\Framework\MockObject\MockObject&\App\Api\V1\Mapper\Courses\Course\CourseMapper $mapper */
         $mapper = $this->createMock(CourseMapper::class);
 
-        $provider = new CourseProvider($repository, $mapper);
+        /** @var \PHPUnit\Framework\MockObject\MockObject&\Symfony\Component\HttpFoundation\RequestStack $requestStack */
+        $requestStack = $this->createMock(RequestStack::class);
+
+        $provider = new CourseProvider($repository, $mapper, $requestStack);
 
         /** @var \PHPUnit\Framework\MockObject\MockObject&\ApiPlatform\Metadata\Operation $operation */
         $operation = $this->createMock(Operation::class);

@@ -7,7 +7,6 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use App\Api\Utils\ApiResourceInterface;
 use App\Api\V1\Dto\Courses\Content\ContentInput;
-use App\Api\V1\Dto\Courses\Content\ContentOutput;
 use App\Api\V1\Dto\Translation\TranslationInput;
 use App\Api\V1\State\Courses\Content\ContentProcessor;
 use App\Api\V1\State\Courses\Content\ContentProvider;
@@ -20,13 +19,11 @@ use DateTime;
     routePrefix: '/v1',
     operations: [
         new Get(
-            output: ContentOutput::class,
             provider: ContentProvider::class,
             name: 'get_content_by_id'
         ),
         new Post(
             input: ContentInput::class,
-            output: ContentOutput::class,
             processor: ContentProcessor::class,
             name: 'create_content'
         ),
@@ -41,16 +38,39 @@ use DateTime;
 )]
 class Content implements ApiResourceInterface
 {
-    private string $id;
-    private Chapter $chapter;
-    private ?Content $parentContent;
-    private ?Content $previousContent;
-    private ?Content $nextContent;
-    private Translation $translation;
-    private ContentType $type;
-    private DateTime $createdAt;
-    private DateTime $updatedAt;
 
+    public string $id;
+    public string $chapter;
+    public ?string $parentContent;
+    public ?string $previousContent;
+    public ?string $nextContent;
+    public int $type;
+    public string $content;
+    public DateTime $createdAt;
+    public DateTime $updatedAt;
+
+    public function __construct(
+        string $id,
+        string $chapter,
+        ?string $parentContent,
+        ?string $previousContent,
+        ?string $nextContent,
+        int $type,
+        string $content,
+        DateTime $createdAt,
+        DateTime $updatedAt
+    ) {
+        $this->id = $id;
+        $this->chapter = $chapter;
+        $this->parentContent = $parentContent;
+        $this->previousContent = $previousContent;
+        $this->nextContent = $nextContent;
+        $this->type = $type;
+        $this->content = $content;
+        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
+    }
+    
     public static function getEntityClass() : string {
         return EntityContent::class;
     }

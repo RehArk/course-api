@@ -8,7 +8,6 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Api\Utils\ApiResourceInterface;
 use App\Api\V1\Dto\Courses\ContentType\ContentTypeInput;
-use App\Api\V1\Dto\Courses\ContentType\ContentTypeOutput;
 use App\Api\V1\State\Courses\ContentType\ContentTypeProcessor;
 use App\Api\V1\State\Courses\ContentType\ContentTypeProvider;
 use App\Entity\ContentType as EntityContentType;
@@ -17,18 +16,15 @@ use App\Entity\ContentType as EntityContentType;
     routePrefix: '/v1',
     operations: [
         new Get(
-            output: ContentTypeOutput::class,
             provider: ContentTypeProvider::class,
             name: 'get_content_type_by_id'
         ),
         new GetCollection(
-            output: ContentTypeOutput::class,
             provider: ContentTypeProvider::class,
             name: 'get_all_content_types'
         ),
         new Post(
             input: ContentTypeInput::class,
-            output: ContentTypeOutput::class,
             processor: ContentTypeProcessor::class,
             name: 'create_content_type_course'
         )
@@ -36,8 +32,17 @@ use App\Entity\ContentType as EntityContentType;
 )]
 class ContentType implements ApiResourceInterface
 {
-    private int $id;
-    private string $name;
+
+    public int $id;
+    public string $name;
+
+    public function __construct(
+        int $id,
+        string $name
+    ) {
+        $this->id = $id;
+        $this->name = $name;
+    }
 
     public static function getEntityClass() : string {
         return EntityContentType::class;

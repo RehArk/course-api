@@ -2,8 +2,8 @@
 
 namespace App\Tests\Mapper\Courses\Course;
 
-use App\Api\V1\Dto\Courses\Course\CourseOutput;
 use App\Api\V1\Mapper\Courses\Course\CourseMapper;
+use App\ApiResource\V1\Course as ApiCourse;
 use App\Entity\Course;
 use App\Entity\Translation;
 use DateTime;
@@ -30,7 +30,7 @@ class CourseMapperTest extends TestCase
         /** @var \PHPUnit\Framework\MockObject\MockObject&\App\Entity\Course $course */
         $dto = (new CourseMapper)->fromEntity($course);
 
-        $this->assertInstanceOf(CourseOutput::class, $dto);
+        $this->assertInstanceOf(ApiCourse::class, $dto);
         $this->assertSame($courseId, $dto->id);
         $this->assertSame($title, $dto->title);
         $this->assertSame($createdAt, $dto->createdAt);

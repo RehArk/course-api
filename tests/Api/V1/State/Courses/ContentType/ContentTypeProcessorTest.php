@@ -4,11 +4,11 @@ namespace App\Tests\Api\V1\State\Courses\ContentType;
 
 use ApiPlatform\Metadata\Operation;
 use App\Api\V1\Dto\Courses\ContentType\ContentTypeInput;
-use App\Api\V1\Dto\Courses\ContentType\ContentTypeOutput;
 use App\Api\V1\Dto\Courses\ContentType\PreparedContentTypeInput;
 use App\Api\V1\Mapper\Courses\ContentType\ContentTypeMapper;
 use App\Api\V1\Services\Courses\ContentType\ContentTypePreparer;
 use App\Api\V1\State\Courses\ContentType\ContentTypeProcessor;
+use App\ApiResource\V1\ContentType as ApiContentType;
 use App\Entity\ContentType;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
@@ -27,7 +27,7 @@ class ContentTypeProcessorTest extends TestCase
             $contentTypeInput->name
         );
 
-        $contentTypeOutput = new ContentTypeOutput(
+        $contentTypeOutput = new ApiContentType(
             '1',
             $contentTypeInput->name
         );

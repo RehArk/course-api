@@ -7,26 +7,22 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use App\Api\Utils\ApiResourceInterface;
 use App\Api\V1\Dto\Courses\Course\CourseInput;
-use App\Api\V1\Dto\Courses\Course\CourseOutput;
 use App\Api\V1\Dto\Translation\TranslationInput;
 use App\Api\V1\State\Courses\Course\CourseProcessor;
 use App\Api\V1\State\Courses\Course\CourseProvider;
 use App\Api\V1\State\Translation\TranslationProcessor;
 use App\Entity\Course as EntityCourse;
-use App\Entity\Translation;
 use DateTime;
 
 #[ApiResource(
     routePrefix: '/v1',
     operations: [
         new Get(
-            output: CourseOutput::class,
             provider: CourseProvider::class,
             name: 'get_course_by_id'
         ),
         new Post(
             input: CourseInput::class,
-            output: CourseOutput::class,
             processor: CourseProcessor::class,
             name: 'create_course'
         ),
@@ -42,9 +38,21 @@ use DateTime;
 class Course implements ApiResourceInterface
 {
     public string $id;
-    public Translation $translation;
-    public DateTime $createdAt;
-    public DateTime $updatedAt;
+    public string $title;
+    public \DateTime $createdAt;
+    public \DateTime $updatedAt;
+
+    public function __construct(
+        string $id,
+        string $title,
+        DateTime $createdAt,
+        DateTime $updatedAt
+    ) {
+        $this->id = $id;
+        $this->title = $title;
+        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
+    }
 
     public static function getEntityClass() : string {
         return EntityCourse::class;

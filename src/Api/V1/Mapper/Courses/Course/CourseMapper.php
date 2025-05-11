@@ -2,14 +2,22 @@
 
 namespace App\Api\V1\Mapper\Courses\Course;
 
-use App\Api\V1\Dto\Courses\Course\CourseOutput;
+use App\ApiResource\V1\Course as ApiCourse;
+use App\Utils\Mapper\AbstractMapper;
 use App\Entity\Course;
 
-class CourseMapper
+class CourseMapper extends AbstractMapper
 {
-    public function fromEntity(Course $course): CourseOutput
-    {
-        return new CourseOutput(
+
+    /**
+     * @param Course $entity
+     * 
+     * @return ApiCourse
+     */
+    public function fromEntity(
+        mixed $course
+    ): mixed {
+        return new ApiCourse(
             $course->getId(),
             $course->getTranslation()->getText(),
             $course->getCreatedAt(),

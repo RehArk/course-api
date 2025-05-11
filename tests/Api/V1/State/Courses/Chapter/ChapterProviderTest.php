@@ -7,7 +7,7 @@ use App\Api\V1\Mapper\Courses\Chapter\ChapterMapper;
 use App\Entity\Chapter;
 use App\Repository\ChapterRepository;
 use ApiPlatform\Metadata\Operation;
-use App\Api\V1\Dto\Courses\Chapter\ChapterOutput;
+use App\ApiResource\V1\Chapter as ApiChapter;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -17,7 +17,7 @@ class ChapterProviderTest extends TestCase
     public function testProvideReturnsMappedChapter()
     {
         $id = '1';
-        $dto = new ChapterOutput(
+        $dto = new ApiChapter(
             $id,
             '1',
             null,

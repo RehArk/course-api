@@ -2,15 +2,22 @@
 
 namespace App\Api\V1\Mapper\Courses\Content;
 
-use App\Api\V1\Dto\Courses\Content\ContentOutput;
+use App\ApiResource\V1\Content as ApiContent;
 use App\Entity\Content;
+use App\Utils\Mapper\AbstractMapper;
 
-class ContentMapper {
+class ContentMapper extends AbstractMapper
+{
 
+    /**
+     * @param Content $entity
+     * 
+     * @return ApiContent
+     */
     public function fromEntity(
-        Content $content
-    ) : ContentOutput {
-        return new ContentOutput(
+        mixed $content
+    ): mixed {
+        return new ApiContent(
             $content->getId(),
             $content->getChapter()->getId(),
             $content->getParentContent()?->getId(),

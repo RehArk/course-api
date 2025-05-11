@@ -2,8 +2,8 @@
 
 namespace App\Tests\Mapper\Courses\Chapter;
 
-use App\Api\V1\Dto\Courses\Chapter\ChapterOutput;
 use App\Api\V1\Mapper\Courses\Chapter\ChapterMapper;
+use App\ApiResource\V1\Chapter as ApiChapter;
 use App\Entity\Chapter;
 use App\Entity\Course;
 use App\Entity\Translation;
@@ -45,7 +45,7 @@ class ChapterMapperTest extends TestCase
 
         $dto = (new ChapterMapper)->fromEntity($chapter);
 
-        $this->assertInstanceOf(ChapterOutput::class, $dto);
+        $this->assertInstanceOf(ApiChapter::class, $dto);
         $this->assertSame($chapterId, $dto->id);
         $this->assertSame($courseId, $dto->course);
         $this->assertSame($prevChapterId, $dto->previousChapter);

@@ -4,11 +4,11 @@ namespace App\Tests\Api\V1\State\Courses\Content;
 
 use ApiPlatform\Metadata\Operation;
 use App\Api\V1\Dto\Courses\Content\ContentInput;
-use App\Api\V1\Dto\Courses\Content\ContentOutput;
 use App\Api\V1\Dto\Courses\Content\PreparedContentInput;
 use App\Api\V1\Mapper\Courses\Content\ContentMapper;
 use App\Api\V1\Services\Courses\Content\ContentPreparer;
 use App\Api\V1\State\Courses\Content\ContentProcessor;
+use App\ApiResource\V1\Content as ApiContent;
 use App\Entity\Chapter;
 use App\Entity\ContentType;
 use App\Entity\Translation;
@@ -58,7 +58,7 @@ class ContentProcessorTest extends TestCase
             $contentInput->default_content
         );
 
-        $contentOutput = new ContentOutput(
+        $contentOutput = new ApiContent(
             '1',
             '1',
             null,
